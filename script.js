@@ -66,7 +66,7 @@ function generatePassword() {
   }
   let randomStr = "";
   const funcArr = Object.keys(randomFunc);
-  const len = Number(lengthEl.value);
+  const len = Number(lengthEl.value) - 1;
   let q = 0;
   for (let i = 0; i <= len; i++) {
     if (q === funcArr.length) {
