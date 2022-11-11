@@ -7,6 +7,7 @@ const symbolsEl = document.getElementById("symbols");
 const generateEl = document.getElementById("generate");
 const clipboardEl = document.getElementById("clipboard");
 const settings = document.querySelectorAll(".setting");
+const resultElContainer = document.querySelector(".result-container");
 
 const alphabets = "abcdefghijklmnopqrstuvwxyz";
 const symbols = `!@#$%^&*():;[]+=-_`;
@@ -25,9 +26,17 @@ const sampleRandFunc = {
 };
 const selectionArray = ["uppercase", "lowercase", "numbers", "symbols"];
 
-clipboardEl.addEventListener("click", () =>
-  navigator.clipboard.writeText(resultEl.innerText)
-);
+clipboardEl.addEventListener("click", () => {
+  if (resultEl.innerText.length === 0) {
+    alert("There is nothing to copy");
+    return;
+  }
+  navigator.clipboard.writeText(resultEl.innerText);
+  resultElContainer.style.border = "3px solid green";
+  setTimeout(() => {
+    resultElContainer.style.border = "";
+  }, 1000);
+});
 
 settings.forEach((item, index) => {
   if (index === 0) return;
