@@ -23,11 +23,6 @@ const sampleRandFunc = {
   numbers: getRandomNumber,
   symbols: getRandomSymbol,
 };
-const selectionArray = ["uppercase", "lowercase", "numbers", "symbols"];
-
-clipboardEl.addEventListener("click", () =>
-  navigator.clipboard.writeText(resultEl.innerText)
-);
 
 settings.forEach((item, index) => {
   if (index === 0) return;
@@ -45,38 +40,10 @@ settings.forEach((item, index) => {
       delete randomFunc[item.querySelector("input").getAttribute("id")];
     }
     randFuncArray = Object.keys(randomFunc);
+    console.log(randomFunc);
+    console.log(randFuncArray);
   });
 });
-
-generateEl.addEventListener("click", () => generatePassword());
-
-function generatePassword() {
-  if (Object.keys(randomFunc).length === 0) {
-    alert("At least one setting should be selected");
-    return;
-  }
-  let randomStr = "";
-  const funcArr = Object.keys(randomFunc);
-  const len = Number(lengthEl.value);
-  let q = 0;
-  for (let i = 0; i <= len; i++) {
-    if (q === funcArr.length) {
-      q = 0;
-    }
-    randomStr += randomFunc[funcArr[q]]();
-    q++;
-  }
-  const randArraySplit = randomStr.split("");
-  for (let i = 100; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [randArraySplit[i], randArraySplit[j]] = [
-      randArraySplit[j],
-      randArraySplit[i],
-    ];
-  }
-  randomStr = randArraySplit.join("");
-  resultEl.innerText = randomStr;
-}
 
 function getRandomLower() {
   const alpha = "abcdefghijklmnopqrstuvwxyz";
